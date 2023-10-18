@@ -43,9 +43,17 @@ public class Client{
             Topic storage= (Topic) jdniContext.lookup("storage");
             TopicSession ts=tc.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);
             
-            //Creazione del messaggio
+            
+            //Il Client richiede il salvataggio di un dato (ossia un int tra 0 e 100)
+            //ed indica la porta di “LoggerServer” tramite l’invio di un MapMessage JMS
+
+        
+            //Creazione del messaggio contenente 
+            //1) il dato da salvare e
+            //2) porta del LoggerServer,
+            //entrambi specificati da prompt e quindi inseriti nel messaggio JMS.
             MapMessage mess=ts.createMapMessage();
-            mess.setInt("dato", Integer.parseInt(args[0]));
+            mess.setInt("dato", Integer.parseInt(args[0])); 
             mess.setInt("porta",Integer.parseInt(args[1]));
             
             //Creazione del publisher e invio del messaggio
@@ -53,7 +61,7 @@ public class Client{
             tp.send(mess);
             System.out.println("[CLIENT] Messaggio inviato!");
 
-            //Chidi connessione
+            //Chiudi connessione
             tc.close();
 
 

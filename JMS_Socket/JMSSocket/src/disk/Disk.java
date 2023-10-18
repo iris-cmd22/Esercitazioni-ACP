@@ -37,7 +37,7 @@ public class Disk {
             //Creazione del subscriber 
             TopicSubscriber sub=ts.createSubscriber(storage);
 
-            //Set del Listener
+            //Set del Listener sulla topic storage
             MyListener listener = new MyListener();
             sub.setMessageListener(listener);
             System.out.println("[DISK] Pronto!");
